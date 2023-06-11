@@ -4,6 +4,7 @@
         The two presets Babel uses by default: es2015, react
     */
     "presets": [
+        "@babel/preset-typescript",
         "@babel/preset-env", //compiling ES2015+ syntax
         "@babel/preset-react" //for react
     ],
