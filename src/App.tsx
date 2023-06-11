@@ -1,5 +1,12 @@
-import React from 'react';
-import './app.css';
+import React, { useCallback, useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Navigate,
+  Routes,
+} from 'react-router-dom';
+
+import Users from './user/pages/Users';
 
 const App: React.FC = () => {
   return (
