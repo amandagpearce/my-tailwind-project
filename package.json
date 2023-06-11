@@ -1,7 +1,7 @@
 {
-  "name": "my-portfolio",
+  "name": "voyage-vault",
   "version": "1.0.0",
-  "description": "Amanda Pearce's Portfolio Website",
+  "description": "An App to share your favourite places in the world!",
   "main": "index.tsx",
   "scripts": {
     "test": "test",
@@ -37,6 +37,7 @@
     "webpack-dev-server": "^4.15.0"
   },
   "dependencies": {
+    "@types/react-transition-group": "^4.4.6",
     "css-loader": "^6.8.1",
     "postcss-loader": "^7.3.2",
     "react": "^18.2.0",
