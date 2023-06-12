@@ -82,6 +82,10 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
+      {
+        test: /\.d\.ts$/, // Add a rule for handling TypeScript declaration files
+        use: 'null-loader',
+      },
     ],
   },
 };
