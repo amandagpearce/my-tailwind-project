@@ -38,8 +38,6 @@ const App: React.FC = () => {
         <Route path="/" element={<Users />} />
         <Route path="/:userId/places" element={<UserPlaces />} />
         <Route path="/auth" element={<Auth />} />
-        navigate('/auth')
-        {/* if the user arrives in any other unspecified route, return to /auth */}
       </Routes>
     );
   }
