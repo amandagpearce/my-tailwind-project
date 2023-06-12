@@ -3,7 +3,7 @@ import { useCallback, useReducer } from 'react';
 interface FormState {
   inputs: {
     [key: string]: {
-      value: string;
+      value?: string;
       isValid: boolean;
     };
   };
@@ -60,7 +60,11 @@ export const useForm = (
 ): [
   FormState,
   (id: string, value: string, isValid: boolean) => void,
-  (inputs: FormState['inputs'], formValidity: boolean) => void
+  (
+    inputs: FormState['inputs'],
+    formValidity: boolean,
+    isLoginMode: boolean
+  ) => void
 ] => {
   const [formState, dispatch] = useReducer(formReducer, {
     inputs: initialInputs,
@@ -80,14 +84,32 @@ export const useForm = (
   );
 
   const setFormData = useCallback(
-    (inputData: FormState['inputs'], formValidity: boolean) => {
+    (
+      inputData: FormState['inputs'],
+      formValidity: boolean,
+      isLoginMode: boolean
+    ) => {
+      const updatedInputs = {
+        ...formState.inputs,
+        ...inputData,
+      };
+
+      if (!isLoginMode) {
+        updatedInputs.name = {
+          value: '',
+          isValid: false,
+        };
+      } else {
+        delete updatedInputs.name;
+      }
+
       dispatch({
         type: 'SET_DATA',
-        inputs: inputData,
+        inputs: updatedInputs,
         formIsValid: formValidity,
       });
     },
-    []
+    [formState.inputs, dispatch]
   );
 
   return [formState, inputHandler, setFormData];
