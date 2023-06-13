@@ -1,8 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Link as RouterLink, LinkProps } from 'react-router-dom';
 
-import './Button.css';
-
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string;
   to?: LinkProps['to'];
@@ -18,9 +16,11 @@ const Button: React.FC<ButtonProps> = (props) => {
   if (props.href) {
     return (
       <a
-        className={`button button--${props.size || 'default'} ${
-          props.inverse && 'button--inverse'
-        } ${props.danger && 'button--danger'}`}
+        className={`text-white p-3 rounded border-1 bg-lightPurple ${
+          props.inverse && 'bg-white'
+        } ${props.danger && 'border-rose-500'} ${
+          props.disabled && 'disabled:opacity-75 cursor-not-allowed'
+        }`}
         href={props.href}
       >
         {props.children}
@@ -31,9 +31,11 @@ const Button: React.FC<ButtonProps> = (props) => {
     return (
       <RouterLink
         to={props.to}
-        className={`button button--${props.size || 'default'} ${
-          props.inverse && 'button--inverse'
-        } ${props.danger && 'button--danger'}`}
+        className={`text-white p-3 rounded border-1 bg-lightPurple ${
+          props.inverse && 'bg-white'
+        } ${props.danger && 'border-rose-500'} ${
+          props.disabled && 'disabled:opacity-75 cursor-not-allowed'
+        }`}
       >
         {props.children}
       </RouterLink>
@@ -41,9 +43,11 @@ const Button: React.FC<ButtonProps> = (props) => {
   }
   return (
     <button
-      className={`button button--${props.size || 'default'} ${
-        props.inverse && 'button--inverse'
-      } ${props.danger && 'button--danger'}`}
+      className={`text-white p-3 rounded border-1 bg-lightPurple ${
+        props.inverse && 'bg-white'
+      } ${props.danger && 'border-rose-500'} ${
+        props.disabled && 'disabled:opacity-75 cursor-not-allowed'
+      }`}
       type={props.type}
       onClick={props.onClick}
       disabled={props.disabled}

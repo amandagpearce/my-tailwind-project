@@ -24,6 +24,7 @@ const App: React.FC = () => {
 
   const navigate = useNavigate();
   let routes;
+  console.log('isLoggedIn', isLoggedIn);
 
   if (isLoggedIn) {
     routes = (
@@ -50,7 +51,7 @@ const App: React.FC = () => {
         value={{ isLoggedIn: isLoggedIn ?? false, login, logout }}
       >
         <MainNavigation />
-        <main className="mt-32">{routes}</main>
+        <main className="mt-22">{routes}</main>
       </AuthContext.Provider>
     </Fragment>
   );

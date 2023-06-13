@@ -29,6 +29,7 @@ module.exports = {
    */
   target: 'web',
   devServer: {
+    historyApiFallback: true,
     /** "port"
      * port of dev server
      */

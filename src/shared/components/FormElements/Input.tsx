@@ -1,5 +1,4 @@
 import React, { useReducer, useEffect, ChangeEvent } from 'react';
-import './Input.css';
 import { validate } from '../../util/validators';
 
 interface InputProps {
@@ -81,6 +80,7 @@ const Input: React.FC<InputProps> = (props) => {
         onChange={changeHandler}
         onBlur={touchHandler}
         value={inputState.value}
+        className="rounded border-2 mt-3 mb-3 border-purple p-2 focus:outline-none w-full"
       />
     ) : (
       <textarea
@@ -89,6 +89,7 @@ const Input: React.FC<InputProps> = (props) => {
         onChange={changeHandler}
         onBlur={touchHandler}
         value={inputState.value}
+        className="rounded border-2 mt-3 mb-3 border-purple p-2 focus:outline-none w-full"
       />
     );
 
