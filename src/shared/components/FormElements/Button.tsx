@@ -17,7 +17,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     return (
       <a
         className={`text-white p-3 rounded border-1 bg-lightPurple ${
-          props.inverse && 'bg-white'
+          props.inverse && 'bg-lightPurple'
         } ${props.danger && 'border-rose-500'} ${
           props.disabled && 'disabled:opacity-75 cursor-not-allowed'
         }`}
@@ -32,7 +32,7 @@ const Button: React.FC<ButtonProps> = (props) => {
       <RouterLink
         to={props.to}
         className={`text-white p-3 rounded border-1 bg-lightPurple ${
-          props.inverse && 'bg-white'
+          props.inverse && 'bg-lightPurple'
         } ${props.danger && 'border-rose-500'} ${
           props.disabled && 'disabled:opacity-75 cursor-not-allowed'
         }`}
@@ -44,7 +44,7 @@ const Button: React.FC<ButtonProps> = (props) => {
   return (
     <button
       className={`text-white p-3 rounded border-1 bg-lightPurple ${
-        props.inverse && 'bg-white'
+        props.inverse && 'bg-lightPurple'
       } ${props.danger && 'border-rose-500'} ${
         props.disabled && 'disabled:opacity-75 cursor-not-allowed'
       }`}
