@@ -9,6 +9,8 @@ import Auth from './user/pages/Auth';
 import AuthContext from './shared/context/auth-context';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 
+import './App.css';
+
 const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
 
@@ -48,7 +50,7 @@ const App: React.FC = () => {
         value={{ isLoggedIn: isLoggedIn ?? false, login, logout }}
       >
         <MainNavigation />
-        <main>{routes}</main>
+        <main className="mt-32">{routes}</main>
       </AuthContext.Provider>
     </Fragment>
   );
