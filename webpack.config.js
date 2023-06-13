@@ -12,12 +12,12 @@ module.exports = {
   /** "entry"
    * the entry point
    */
-  entry: './index.tsx',
+  entry: './src/index.tsx',
   output: {
     /** "path"
      * the folder path of the output file
      */
-    path: path.resolve(__dirname, 'public'),
+    path: path.resolve(__dirname, 'dist'),
     /** "filename"
      * the name of the output file
      */

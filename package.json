@@ -2,7 +2,7 @@
   "name": "voyage-vault",
   "version": "1.0.0",
   "description": "An App to share your favourite places in the world!",
-  "main": "index.tsx",
+  "main": "./src/index.tsx",
   "scripts": {
     "test": "test",
     "start": "webpack-dev-server .",

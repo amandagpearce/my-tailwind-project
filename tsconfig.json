@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "./dist/",
     "jsx": "react",
     "lib": ["es6", "dom"],
     "rootDir": "src",
