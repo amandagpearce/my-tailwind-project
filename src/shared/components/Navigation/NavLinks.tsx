@@ -40,7 +40,12 @@ const NavLinks = () => {
 
       {authContext.isLoggedIn && (
         <li>
-          <button onClick={authContext.logout}>Logout</button>
+          <button
+            className="hover:bg-hoverPurple p-3"
+            onClick={authContext.logout}
+          >
+            Logout
+          </button>
         </li>
       )}
     </ul>
