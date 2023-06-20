@@ -13,13 +13,16 @@ import './App.css';
 
 const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
+  const [userId, setUserId] = useState();
 
-  const login = useCallback(() => {
+  const login = useCallback((uid) => {
     setIsLoggedIn(true);
+    setUserId(uid);
   }, []);
 
   const logout = useCallback(() => {
     setIsLoggedIn(false);
+    setUserId(null);
   }, []);
 
   const navigate = useNavigate();
@@ -48,7 +51,12 @@ const App: React.FC = () => {
   return (
     <Fragment>
       <AuthContext.Provider
-        value={{ isLoggedIn: isLoggedIn ?? false, login, logout }}
+        value={{
+          isLoggedIn: isLoggedIn ?? false,
+          userId: userId,
+          login,
+          logout,
+        }}
       >
         <MainNavigation />
         <main className="mt-22">{routes}</main>
