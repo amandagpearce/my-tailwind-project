@@ -15,12 +15,13 @@ import AuthContext from '../../shared/context/auth-context';
 import ErrorModal from '../../shared/components/UI/ErrorModal';
 import LoadingSpinner from '../../shared/components/UI/LoadingSpinner';
 
+import { useHttpClient } from '../../shared/hooks/http-hook';
+
 const Auth = () => {
   const authContext = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState<boolean>(true);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState();
   const navigate = useNavigate();
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -58,54 +59,50 @@ const Auth = () => {
   };
 
   const authSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
     console.log(formState.inputs);
-    if (isLoginMode) {
-    } else {
-      try {
-        setIsLoading(true);
-        setError(undefined);
 
-        const response = await fetch('http://localhost:5000/api/users/signup', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json', // without this the backend does not know what type of data they are receiving
-          },
-          body: JSON.stringify({
+    event.preventDefault();
+
+    if (isLoginMode) {
+      try {
+        await sendRequest(
+          'http://localhost:5000/api/users/login',
+          'POST',
+          JSON.stringify({
+            email: formState.inputs.email.value,
+            password: formState.inputs.password.value,
+          }),
+          { 'Content-Type': 'application/json' } // without this the backend does not know what type of data they are receiving
+        );
+
+        authContext.login();
+        navigate('/');
+      } catch (err) {}
+    } else {
+      // signUp mode
+      try {
+        await sendRequest(
+          'http://localhost:5000/api/users/signup',
+          'POST',
+          JSON.stringify({
             name: formState.inputs.name.value,
             email: formState.inputs.email.value,
             password: formState.inputs.password.value,
           }),
-        });
-
-        const responseData = await response.json();
-        if (!response.ok) {
-          // throwing error here since a error response from fetch will not be caught automatically
-          throw new Error(responseData.message);
-        }
-
-        console.log('responseData', responseData);
-
-        setIsLoading(false);
+          {
+            'Content-Type': 'application/json', // without this the backend does not know what type of data they are receiving
+          }
+        );
 
         authContext.login();
-
         navigate('/');
-      } catch (error) {
-        console.log('error', error);
-        setIsLoading(false);
-        setError(error.message || 'Something went wrong, try again.');
-      }
+      } catch (error) {}
     }
-  };
-
-  const errorHandler = () => {
-    setError(undefined);
   };
 
   return (
     <Fragment>
-      <ErrorModal error={error} onClear={errorHandler} />
+      <ErrorModal error={error} onClear={clearError} />
       <Card className="authentication">
         {isLoading && <LoadingSpinner asOverlay />}
 

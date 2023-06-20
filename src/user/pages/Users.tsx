@@ -1,26 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 
 import UsersList from '../components/UsersList';
+import ErrorModal from '../../shared/components/UI/ErrorModal';
+import LoadingSpinner from '../../shared/components/UI/LoadingSpinner';
+import { useHttpClient } from '../../shared/hooks/http-hook';
 
 interface User {
   id: string;
   name: string;
   image: string;
-  places: number;
+  places: [];
 }
 
 const Users: React.FC = () => {
-  const USERS: User[] = [
-    {
-      id: 'u1',
-      name: 'Max Schwarz',
-      image:
-        'https://images.pexels.com/photos/839011/pexels-photo-839011.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-      places: 3,
-    },
-  ];
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const [loadedUsers, setLoadedUsers] = useState<User[]>([]);
 
-  return <UsersList items={USERS} />;
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const responseData = await sendRequest(
+          'http://localhost:5000/api/users/'
+        );
+
+        setLoadedUsers(responseData.users);
+      } catch (err) {}
+    };
+
+    fetchUsers();
+  }, [sendRequest]);
+
+  return (
+    <Fragment>
+      <ErrorModal error={error} onClear={clearError} />
+      {isLoading && (
+        <div className="h-screen flex items-center justify-center">
+          <LoadingSpinner asOverlay />
+        </div>
+      )}
+      {!isLoading && loadedUsers && <UsersList items={loadedUsers} />}
+    </Fragment>
+  );
 };
 
 export default Users;
