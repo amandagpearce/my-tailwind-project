@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import PlaceList from '../components/PlaceList';
+import ErrorModal from '../../shared/components/UI/ErrorModal';
+import LoadingSpinner from '../../shared/components/UI/LoadingSpinner';
+import { useHttpClient } from '../../shared/hooks/http-hook';
 
 interface Place {
   id: string;
@@ -16,43 +19,41 @@ interface Place {
   creator: string;
 }
 
-const DUMMY_PLACES: Place[] = [
-  {
-    id: 'p1',
-    title: 'Empire State Building',
-    description: 'One of the most famous sky scrapers in the world!',
-    imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
-    address: '20 W 34th St, New York, NY 10001',
-    location: {
-      lat: 40.7484405,
-      lng: -73.9878584,
-    },
-    creator: 'u1',
-  },
-  {
-    id: 'p2',
-    title: 'Emp State Building',
-    description: 'One of the most famous sky scrapers in the world!',
-    imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
-    address: '20 W 34th St, New York, NY 10001',
-    location: {
-      lat: 40.7484405,
-      lng: -73.9878584,
-    },
-    creator: 'u2',
-  },
-];
-
 const UserPlaces: React.FC = () => {
+  const [loadedPlaces, setLoadedPlaces] = useState();
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
+  // extracting user id from the url
   const { userId } = useParams<{ userId: string }>();
 
-  const filteredPlaces = DUMMY_PLACES.filter(
-    (place) => place.creator === userId
-  );
+  useEffect(() => {
+    const fetchPlaces = async () => {
+      // using an IIFE to not make the use effect function async which would be a bad practice
+      try {
+        const responseData = await sendRequest(
+          `http://localhost:5000/api/places/user/${userId}`,
+          'GET'
+        );
 
-  return <PlaceList items={filteredPlaces} />;
+        setLoadedPlaces(responseData.places);
+      } catch (err) {}
+    };
+
+    fetchPlaces();
+  }, [sendRequest, userId]); // setting sendRequest(which is wrapped with useCallback) as a dependency so the useEffect wont run again on rerenders
+
+  return (
+    <Fragment>
+      <ErrorModal error={error} onClear={clearError} />
+      {isLoading && (
+        <div className="h-screen flex items-center justify-center">
+          <LoadingSpinner asOverlay />
+        </div>
+      )}
+
+      {!isLoading && loadedPlaces && <PlaceList items={loadedPlaces} />}
+    </Fragment>
+  );
 };
 
 export default UserPlaces;
