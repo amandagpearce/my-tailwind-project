@@ -1,116 +1,59 @@
 import { useCallback, useReducer } from 'react';
 
-interface FormState {
-  inputs: {
-    [key: string]: {
-      value?: string;
-      isValid: boolean;
-    };
-  };
-  isValid: boolean;
-}
-
-interface Action {
-  type: string;
-  value?: string;
-  isValid?: boolean;
-  inputId?: string;
-  inputs?: FormState['inputs'];
-  formIsValid?: boolean;
-}
-
-const formReducer = (state: FormState, action: Action): FormState => {
+const formReducer = (state, action) => {
   switch (action.type) {
     case 'INPUT_CHANGE':
       let formIsValid = true;
-
       for (const inputId in state.inputs) {
         if (!state.inputs[inputId]) {
           continue;
         }
-
         if (inputId === action.inputId) {
-          formIsValid = formIsValid && action.isValid!;
+          formIsValid = formIsValid && action.isValid;
         } else {
           formIsValid = formIsValid && state.inputs[inputId].isValid;
         }
       }
-
       return {
         ...state,
         inputs: {
           ...state.inputs,
-          [action.inputId!]: { value: action.value!, isValid: action.isValid! },
+          [action.inputId]: { value: action.value, isValid: action.isValid },
         },
         isValid: formIsValid,
       };
     case 'SET_DATA':
       return {
-        inputs: action.inputs!,
-        isValid: action.formIsValid!,
+        inputs: action.inputs,
+        isValid: action.formIsValid,
       };
     default:
       return state;
   }
 };
 
-export const useForm = (
-  initialInputs: FormState['inputs'],
-  initialFormValidity: boolean
-): [
-  FormState,
-  (id: string, value: string, isValid: boolean) => void,
-  (
-    inputs: FormState['inputs'],
-    formValidity: boolean,
-    isLoginMode: boolean
-  ) => void
-] => {
+export const useForm = (initialInputs, initialFormValidity) => {
   const [formState, dispatch] = useReducer(formReducer, {
     inputs: initialInputs,
     isValid: initialFormValidity,
   });
 
-  const inputHandler = useCallback(
-    (id: string, value: string, isValid: boolean) => {
-      dispatch({
-        type: 'INPUT_CHANGE',
-        value: value,
-        isValid: isValid,
-        inputId: id,
-      });
-    },
-    []
-  );
+  const inputHandler = useCallback((id, value, isValid) => {
+    dispatch({
+      type: 'INPUT_CHANGE',
+      value: value,
+      isValid: isValid,
+      inputId: id,
+    });
+  }, []);
 
-  const setFormData = useCallback(
-    (
-      inputData: FormState['inputs'],
-      formValidity: boolean,
-      isLoginMode: boolean
-    ) => {
-      const updatedInputs = {
-        ...formState.inputs,
-        ...inputData,
-      };
-
-      if (!isLoginMode) {
-        updatedInputs.name = {
-          value: '',
-          isValid: false,
-        };
-      } else {
-        delete updatedInputs.name;
-      }
-
-      dispatch({
-        type: 'SET_DATA',
-        inputs: updatedInputs,
-        formIsValid: formValidity,
-      });
-    },
-    [formState.inputs, dispatch]
-  );
+  const setFormData = useCallback((inputData, formValidity) => {
+    dispatch({
+      type: 'SET_DATA',
+      inputs: inputData,
+      formIsValid: formValidity,
+    });
+  }, []);
 
   return [formState, inputHandler, setFormData];
 };
