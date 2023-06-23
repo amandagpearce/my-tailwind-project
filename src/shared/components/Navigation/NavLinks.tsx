@@ -16,7 +16,10 @@ const NavLinks = () => {
 
       {authContext.isLoggedIn && (
         <li className="p-3">
-          <Link className="hover:bg-hoverPurple p-3" to="/u1/places">
+          <Link
+            className="hover:bg-hoverPurple p-3"
+            to={`/${authContext.userId}/places`}
+          >
             My Places
           </Link>
         </li>

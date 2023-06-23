@@ -14,6 +14,7 @@ import './Auth.css';
 import AuthContext from '../../shared/context/auth-context';
 import ErrorModal from '../../shared/components/UI/ErrorModal';
 import LoadingSpinner from '../../shared/components/UI/LoadingSpinner';
+import ImageUpload from '../../shared/components/FormElements/ImageUpload';
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
@@ -43,16 +44,25 @@ const Auth = () => {
         {
           ...formState.inputs,
           name: { value: '', isValid: false },
+          image: undefined,
         },
         formState.inputs.email.isValid && formState.inputs.password.isValid,
         isLoginMode
       );
     } else {
-      const { name, ...updatedInputs } = formState.inputs;
       setFormData(
-        updatedInputs,
-        formState.inputs.email.isValid && formState.inputs.password.isValid,
-        isLoginMode
+        {
+          ...formState.inputs,
+          name: {
+            value: '',
+            isValid: false,
+          },
+          image: {
+            value: null,
+            isValid: false,
+          },
+        },
+        false
       );
     }
     setIsLoginMode((prevMode) => !prevMode);
@@ -120,6 +130,13 @@ const Auth = () => {
               onInput={inputHandler}
             />
           )}
+
+          {!isLoginMode && (
+            <div className="flex items-center justify-center">
+              <ImageUpload id="image" onInput={inputHandler} />
+            </div>
+          )}
+
           <Input
             element="input"
             id="email"
@@ -134,8 +151,8 @@ const Auth = () => {
             id="password"
             type="password"
             label="Password"
-            validators={[VALIDATOR_MINLENGTH(5)]}
-            errorText="Please enter a valid password, at least 5 characters."
+            validators={[VALIDATOR_MINLENGTH(6)]}
+            errorText="Please enter a valid password, at least 6 characters."
             onInput={inputHandler}
           />
           <Button type="submit" disabled={!formState.isValid}>
