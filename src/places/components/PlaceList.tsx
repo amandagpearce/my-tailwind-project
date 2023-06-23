@@ -44,8 +44,9 @@ const PlaceList: React.FC<PlaceListProps> = (props) => {
           title={place.title}
           description={place.description}
           address={place.address}
+          creatorId={place.creator}
           coordinates={place.location}
-          onDelete={() => {}}
+          onDelete={props.onDeletePlace}
         />
       ))}
     </ul>
