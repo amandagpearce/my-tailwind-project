@@ -1,7 +1,6 @@
 import React from 'react';
 
 import UserItem from './UserItem';
-import './UsersList.css';
 
 interface UsersListProps {
   items: {
@@ -22,7 +21,19 @@ const UsersList: React.FC<UsersListProps> = (props) => {
   }
 
   return (
-    <ul className="users-list">
+    <ul
+      className={`
+                users-list
+                list-none
+                mx-auto
+                p-0
+                w-5/6
+                max-w-3xl
+                flex
+                justify-center
+                flex-wrap
+        `}
+    >
       {props.items.map((user) => (
         <UserItem
           key={user.id}

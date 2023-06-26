@@ -14,6 +14,7 @@ module.exports = {
         white: '#FFF',
         purple: '#442A7E',
         lightPurple: '#820F90',
+        darkPurple: '#510077',
         hoverPurple: '#6746b2',
       },
     },

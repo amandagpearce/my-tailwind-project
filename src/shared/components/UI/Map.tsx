@@ -1,7 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 
-import './Map.css';
-
 interface MapProps {
   center: { lat: number; lng: number };
   zoom: number;
@@ -33,11 +31,7 @@ const Map: React.FC<MapProps> = (props) => {
   }, [center, zoom]);
 
   return (
-    <div
-      ref={mapRef}
-      className={`map ${props.className}`}
-      style={props.style}
-    ></div>
+    <div ref={mapRef} className={`map w-full h-full`} style={props.style}></div>
   );
 };
 

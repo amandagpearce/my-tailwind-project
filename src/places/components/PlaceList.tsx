@@ -2,7 +2,6 @@ import React from 'react';
 
 import Card from '../../shared/components/UI/Card';
 import PlaceItem from './PlaceItem';
-import './PlaceList.css';
 import Button from '../../shared/components/FormElements/Button';
 
 interface Place {
@@ -25,7 +24,17 @@ interface PlaceListProps {
 const PlaceList: React.FC<PlaceListProps> = (props) => {
   if (props.items?.length === 0) {
     return (
-      <div className="place-list center">
+      <div
+        className={`
+            place-list
+            list-none
+            w-full
+            m-4
+            p-0
+            max-w-2xl
+            self-center
+        `}
+      >
         <Card>
           <h2>No places found. Maybe create one?</h2>
           <Button to="/places/new">Add new Place</Button>

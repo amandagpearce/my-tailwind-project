@@ -13,7 +13,6 @@ import {
 import { useForm } from '../../shared/hooks/form-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import AuthContext from '../../shared/context/auth-context';
-import './PlaceForm.css';
 
 const UpdatePlace: React.FC = () => {
   const navigate = useNavigate();
@@ -102,7 +101,21 @@ const UpdatePlace: React.FC = () => {
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       {!isLoading && loadedPlace && (
-        <form className="place-form" onSubmit={placeUpdateSubmitHandler}>
+        <form
+          className={`
+                place-form
+                list-none
+                w-5/6
+                p-4
+                mx-auto
+                max-w-2xl
+                rounded-lg
+                bg-white
+                shadow-lg
+                mt-10
+        `}
+          onSubmit={placeUpdateSubmitHandler}
+        >
           <Input
             id="title"
             element="input"

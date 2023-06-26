@@ -1,22 +1,23 @@
 import React, { CSSProperties } from 'react';
 
-import './Avatar.css';
-
 interface AvatarProps {
   className?: string;
   image: string;
   alt: string;
-  width?: string;
+  width: string;
   style?: CSSProperties;
 }
 
 const Avatar: React.FC<AvatarProps> = (props) => {
   return (
-    <div className={`avatar ${props.className}`} style={props.style}>
+    <div
+      className={`avatar w-full h-full flex justify-center items-center ${props.className}`}
+      style={props.style}
+    >
       <img
         src={props.image}
         alt={props.alt}
-        style={{ width: props.width, height: props.width }}
+        className={`inline-block rounded-full object-cover w-${props.width} h-${props.width}`}
       />
     </div>
   );

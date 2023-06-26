@@ -5,7 +5,6 @@ import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
 import ErrorModal from '../../shared/components/UI/ErrorModal';
 import LoadingSpinner from '../../shared/components/UI/LoadingSpinner';
-import './PlaceForm.css';
 import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE,
@@ -64,7 +63,21 @@ const NewPlace = () => {
   return (
     <Fragment>
       <ErrorModal error={error} onClear={clearError} />
-      <form className="place-form" onSubmit={placeSubmitHandler}>
+      <form
+        className={`
+                    place-form
+                    list-none
+                    w-5/6
+                    p-4
+                    mx-auto
+                    max-w-2xl
+                    rounded-lg
+                    bg-white
+                    shadow-lg
+                    mt-10
+          `}
+        onSubmit={placeSubmitHandler}
+      >
         {isLoading && <LoadingSpinner asOverlay />}
         <Input
           element="input"
