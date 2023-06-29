@@ -87,6 +87,14 @@ module.exports = {
         test: /\.d\.ts$/, // Add a rule for handling TypeScript declaration files
         use: 'null-loader',
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ],
   },
 };

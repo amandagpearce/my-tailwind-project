@@ -6,6 +6,7 @@ import MainHeader from './MainHeader';
 import './MainNavigation.css';
 import NavLinks from './NavLinks';
 import SideDrawer from './SideDrawer';
+import logo from './../../../img/logo.png';
 
 const MainNavigation = () => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
@@ -37,7 +38,11 @@ const MainNavigation = () => {
           <span />
         </button>
         <h1 className="main-navigation__title">
-          <Link to="/">Voyage Vault</Link>
+          <Link to="/">
+            <div className="block w-60">
+              <img src={logo} className="App-logo" alt="Voyage Vault" />
+            </div>
+          </Link>
         </h1>
         <nav className="main-navigation__header-nav w-auto">
           <NavLinks />

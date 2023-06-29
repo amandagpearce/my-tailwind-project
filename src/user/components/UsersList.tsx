@@ -27,11 +27,13 @@ const UsersList: React.FC<UsersListProps> = (props) => {
                 list-none
                 mx-auto
                 p-0
-                w-5/6
-                max-w-3xl
-                flex
-                justify-center
-                flex-wrap
+                pl-0
+                w-full
+                grid
+                lg:grid-cols-4
+                gap-8
+                md:grid-cols-3
+                sm:grid-cols-2
         `}
     >
       {props.items.map((user) => (

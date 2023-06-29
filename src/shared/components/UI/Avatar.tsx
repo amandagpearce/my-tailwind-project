@@ -17,7 +17,7 @@ const Avatar: React.FC<AvatarProps> = (props) => {
       <img
         src={props.image}
         alt={props.alt}
-        className={`inline-block rounded-full object-cover w-${props.width} h-${props.width}`}
+        className={`inline-block rounded-full aspect-square`}
       />
     </div>
   );

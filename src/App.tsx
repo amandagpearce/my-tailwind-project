@@ -59,7 +59,7 @@ const App: React.FC = () => {
         }}
       >
         <MainNavigation />
-        <main className="mt-22">{routes}</main>
+        <main className="mx-auto px-8">{routes}</main>
       </AuthContext.Provider>
     </Fragment>
   );
