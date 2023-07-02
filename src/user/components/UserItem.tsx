@@ -12,7 +12,7 @@ interface UserItemProps {
 
 const UserItem: React.FC<UserItemProps> = (props) => {
   return (
-    <li className="user-item h-full mt-4 w-full">
+    <li className="user-item h-full mt-2 w-full">
       <Card className="user-item__content p-0">
         <Link
           to={`/${props.id}/places`}
@@ -23,9 +23,8 @@ const UserItem: React.FC<UserItemProps> = (props) => {
           p-4
           text-white
           rounded-sm
-          bg-cyan
           decoration-none
-          hover:bg-lightCyan
+          hover:bg-gray-100
           "
         >
           <div className="user-item__image w-1/4 mr-4">
@@ -33,8 +32,8 @@ const UserItem: React.FC<UserItemProps> = (props) => {
           </div>
 
           <div className="user-item__info w-2/4 m-l-2">
-            <h2 className="text-black text-lg mb-1 ">{props.name}</h2>
-            <h3 className="text-darkCyan">
+            <h2 className="text-black text-lg mb-1">{props.name}</h2>
+            <h3 className="text-gray-500">
               {props.placeCount} {props.placeCount === 1 ? 'Place' : 'Places'}
             </h3>
           </div>

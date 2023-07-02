@@ -85,10 +85,10 @@ const PlaceItem: React.FC<PlaceItemProps> = (props) => {
         footerClass="place-item__modal-actions"
         footer={
           <React.Fragment>
-            <Button inverse onClick={cancelDeleteHandler}>
+            <Button className="m-1" onClick={cancelDeleteHandler}>
               Cancel
             </Button>
-            <Button danger onClick={confirmDeleteHandler}>
+            <Button className="m-1 bg-red-600" onClick={confirmDeleteHandler}>
               Delete
             </Button>
           </React.Fragment>
@@ -119,11 +119,14 @@ const PlaceItem: React.FC<PlaceItemProps> = (props) => {
 
             {authContext.userId === props.creatorId && (
               <React.Fragment>
-                <Button className="m-1" to={`/places/${props.id}`}>
+                <Button
+                  className="m-1 bg-yellow-600"
+                  to={`/places/${props.id}`}
+                >
                   EDIT
                 </Button>
                 <Button
-                  className="m-1"
+                  className="m-1 bg-red-600"
                   danger
                   onClick={showDeleteWarningHandler}
                 >

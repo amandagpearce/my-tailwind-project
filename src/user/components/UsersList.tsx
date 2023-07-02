@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import UserItem from './UserItem';
 
@@ -14,15 +14,19 @@ interface UsersListProps {
 const UsersList: React.FC<UsersListProps> = (props) => {
   if (props.items.length === 0) {
     return (
-      <div className="center">
+      <div className="text-center">
         <h2>No users found.</h2>
       </div>
     );
   }
 
   return (
-    <ul
-      className={`
+    <Fragment>
+      <h2 className="text-2xl mt-8 mb-4">
+        Check out these <b>user's places</b>
+      </h2>
+      <ul
+        className={`
                 users-list
                 list-none
                 mx-auto
@@ -30,22 +34,23 @@ const UsersList: React.FC<UsersListProps> = (props) => {
                 pl-0
                 w-full
                 grid
-                lg:grid-cols-4
+                lg:grid-cols-5
                 gap-8
                 md:grid-cols-3
                 sm:grid-cols-2
         `}
-    >
-      {props.items.map((user) => (
-        <UserItem
-          key={user.id}
-          id={user.id}
-          image={user.image}
-          name={user.name}
-          placeCount={user.places.length}
-        />
-      ))}
-    </ul>
+      >
+        {props.items.map((user) => (
+          <UserItem
+            key={user.id}
+            id={user.id}
+            image={user.image}
+            name={user.name}
+            placeCount={user.places.length}
+          />
+        ))}
+      </ul>
+    </Fragment>
   );
 };
 

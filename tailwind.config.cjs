@@ -14,9 +14,6 @@ module.exports = {
         white: '#FFF',
         purple: '#442A7E',
         hoverPurple: '#6746b2',
-        cyan: '#00c9cf',
-        lightCyan: '#28eaef',
-        darkCyan: '#006671',
       },
       screens: {
         xs: '320px',
