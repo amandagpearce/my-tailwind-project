@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 
 import Card from '../../shared/components/UI/Card';
-import './PlaceItem.css';
 import Button from '../../shared/components/FormElements/Button';
 import Modal from '../../shared/components/UI/Modal';
 import ErrorModal from '../../shared/components/UI/ErrorModal';
@@ -70,11 +69,11 @@ const PlaceItem: React.FC<PlaceItemProps> = (props) => {
         show={showMap}
         onCancel={closeMapHandler}
         header={props.address}
-        contentClass="place-item__modal-content"
-        footerClass="place-item__modal-actions"
+        contentClass="place-item__modal-content p-0"
+        footerClass="place-item__modal-actions text-right"
         footer={<Button onClick={closeMapHandler}>Close</Button>}
       >
-        <div className="map-container">
+        <div className="map-container h-72 w-full">
           <Map center={props.coordinates} zoom={16} />
         </div>
       </Modal>
@@ -98,26 +97,36 @@ const PlaceItem: React.FC<PlaceItemProps> = (props) => {
         <p>Do you really want to delete? This can't be undone.</p>
       </Modal>
 
-      <li className="place-item">
-        <Card className="place-item__content">
+      <li className="place-item m-2">
+        <Card className="place-item__content p-0">
           {isLoading && <LoadingSpinner asOverlay />}
-          <div className="place-item__image">
-            <img src={props.image} alt={props.title} />
+          <div className="place-item__image w-full h-36 mr-3 md:h-80">
+            <img
+              src={props.image}
+              alt={props.title}
+              className="w-full h-full object-cover"
+            />
           </div>
-          <div className="place-item__info">
-            <h2>{props.title}</h2>
-            <h3>{props.address}</h3>
-            <p>{props.description}</p>
+          <div className="place-item__info p-4 text-center">
+            <h2 className="text-xl mt-0 mr-0 mb-1 ml-0">{props.title}</h2>
+            <h3 className="text-base mt-0 mr-0 mb-1 ml-0">{props.address}</h3>
+            <p className="text-base mt-0 mr-0 mb-1 ml-0">{props.description}</p>
           </div>
-          <div className="place-item__actions">
-            <Button inverse onClick={openMapHandler}>
+          <div className="place-item__actions p-4 text-center border-t-4 border-purple">
+            <Button className="m-1" inverse onClick={openMapHandler}>
               VIEW ON MAP
             </Button>
 
             {authContext.userId === props.creatorId && (
               <React.Fragment>
-                <Button to={`/places/${props.id}`}>EDIT</Button>
-                <Button danger onClick={showDeleteWarningHandler}>
+                <Button className="m-1" to={`/places/${props.id}`}>
+                  EDIT
+                </Button>
+                <Button
+                  className="m-1"
+                  danger
+                  onClick={showDeleteWarningHandler}
+                >
                   DELETE
                 </Button>
               </React.Fragment>

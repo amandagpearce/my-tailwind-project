@@ -116,7 +116,9 @@ const Auth = () => {
       <Card className="authentication p-4 m-14 shadow-lg">
         {isLoading && <LoadingSpinner asOverlay />}
 
-        <h2>Login Required</h2>
+        <h2 className="text-xl pb-4">
+          Login bellow or <b>switch to signup</b>
+        </h2>
         <hr />
         <form onSubmit={authSubmitHandler}>
           {!isLoginMode && (

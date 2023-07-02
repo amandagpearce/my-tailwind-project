@@ -80,7 +80,7 @@ const Input: React.FC<InputProps> = (props) => {
         onChange={changeHandler}
         onBlur={touchHandler}
         value={inputState.value}
-        className="rounded border-2 mt-3 mb-3 border-purple p-2 focus:outline-none w-full"
+        className="rounded border-2 border-purple mt-1 p-2 focus:border-darkCyan focus:outline-none w-full"
       />
     ) : (
       <textarea
@@ -89,19 +89,23 @@ const Input: React.FC<InputProps> = (props) => {
         onChange={changeHandler}
         onBlur={touchHandler}
         value={inputState.value}
-        className="rounded border-2 mt-3 mb-3 border-purple p-2 focus:outline-none w-full"
+        className="rounded border-2 border-purple mt-1 focus:border-darkCyan p-2 focus:outline-none w-full"
       />
     );
 
   return (
     <div
-      className={`form-control ${
+      className={`form-control m-4 ${
         !inputState.isValid && inputState.isTouched && 'form-control--invalid'
       }`}
     >
-      <label htmlFor={props.id}>{props.label}</label>
+      <label className="mt-2 block text-left" htmlFor={props.id}>
+        {props.label}
+      </label>
       {element}
-      {!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>}
+      {!inputState.isValid && inputState.isTouched && (
+        <p className="text-red-700">{props.errorText}</p>
+      )}
     </div>
   );
 };

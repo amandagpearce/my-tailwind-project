@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import Backdrop from '../UI/Backdrop';
 import MainHeader from './MainHeader';
-import './MainNavigation.css';
 import NavLinks from './NavLinks';
 import SideDrawer from './SideDrawer';
 import logo from './../../../img/logo.png';
@@ -31,20 +30,20 @@ const MainNavigation = () => {
       <MainHeader>
         <button
           onClick={openDrawerHandler}
-          className="main-navigation__menu-btn"
+          className="main-navigation__menu-btn w-6 h-6 bg-transparent flex flex-column justify-around mr-4 cursor-pointer border-none md:hidden"
         >
-          <span />
-          <span />
-          <span />
+          <span className="block w-6 h-5 bg-white" />
+          <span className="block w-6 h-5 bg-white" />
+          <span className="block w-6 h-5 bg-white" />
         </button>
-        <h1 className="main-navigation__title">
+        <h1 className="main-navigation__title h-auto w-60 block relative">
           <Link to="/">
-            <div className="block w-60">
+            <div>
               <img src={logo} className="App-logo" alt="Voyage Vault" />
             </div>
           </Link>
         </h1>
-        <nav className="main-navigation__header-nav w-auto">
+        <nav className="main-navigation__header-nav w-auto block hidden md:block">
           <NavLinks />
         </nav>
       </MainHeader>

@@ -10,14 +10,15 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   children: ReactNode;
+  className?: string;
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
   if (props.href) {
     return (
       <a
-        className={`text-white p-3 rounded border-1 bg-lightPurple ${
-          props.inverse && 'bg-lightPurple'
+        className={`text-white p-3 rounded border-1 bg-purple hover:bg-hoverPurple ${
+          props.inverse && 'bg-purple'
         } ${props.danger && 'border-rose-500'} ${
           props.disabled && 'disabled:opacity-75 cursor-not-allowed'
         }`}
@@ -31,8 +32,11 @@ const Button: React.FC<ButtonProps> = (props) => {
     return (
       <RouterLink
         to={props.to}
-        className={`text-white p-3 rounded border-1 bg-lightPurple ${
-          props.inverse && 'bg-lightPurple'
+        className={`
+        ${
+          props.className
+        } text-white p-3 rounded border-1 bg-purple hover:bg-hoverPurple ${
+          props.inverse && 'bg-purple'
         } ${props.danger && 'border-rose-500'} ${
           props.disabled && 'disabled:opacity-75 cursor-not-allowed'
         }`}
@@ -43,8 +47,10 @@ const Button: React.FC<ButtonProps> = (props) => {
   }
   return (
     <button
-      className={`text-white p-3 rounded border-1 bg-lightPurple ${
-        props.inverse && 'bg-lightPurple'
+      className={`${
+        props.className
+      } text-white p-3 rounded border-1 bg-purple hover:bg-hoverPurple ${
+        props.inverse && 'bg-purple'
       } ${props.danger && 'border-rose-500'} ${
         props.disabled && 'disabled:opacity-75 cursor-not-allowed'
       }`}

@@ -13,14 +13,47 @@ module.exports = {
       colors: {
         white: '#FFF',
         purple: '#442A7E',
-        lightPurple: '#820F90',
-        darkPurple: '#510077',
         hoverPurple: '#6746b2',
         cyan: '#00c9cf',
         lightCyan: '#28eaef',
         darkCyan: '#006671',
       },
+      screens: {
+        xs: '320px',
+      },
     },
   },
-  plugins: [],
+  corePlugins: {
+    // Other core plugins...
+    transitionProperty: false,
+    transitionTimingFunction: false,
+    transitionDuration: false,
+    transitionDelay: false,
+  },
+  plugins: [
+    function ({ addComponents }) {
+      addComponents({
+        '@layer transitions': {
+          '.modal-enter': {
+            transform: 'translateY(-10rem)',
+            opacity: '0',
+          },
+          '.modal-enter-active': {
+            transform: 'translateY(0)',
+            opacity: '1',
+            transition: 'all 200ms',
+          },
+          '.modal-exit': {
+            transform: 'translateY(0)',
+            opacity: '1',
+          },
+          '.modal-exit-active': {
+            transform: 'translateY(-10rem)',
+            opacity: '0',
+            transition: 'all 200ms',
+          },
+        },
+      });
+    },
+  ],
 };

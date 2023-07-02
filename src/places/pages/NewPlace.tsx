@@ -63,6 +63,7 @@ const NewPlace = () => {
   return (
     <Fragment>
       <ErrorModal error={error} onClear={clearError} />
+      <h2 className="text-center text-2xl mt-8 mb-4">Add new place</h2>
       <form
         className={`
                     place-form
@@ -107,7 +108,7 @@ const NewPlace = () => {
           onInput={inputHandler}
         />
 
-        <Button type="submit" disabled={!formState.isValid}>
+        <Button className="m-4" type="submit" disabled={!formState.isValid}>
           Add Place
         </Button>
       </form>

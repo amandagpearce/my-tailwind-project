@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import AuthContext from '../../context/auth-context';
 
@@ -9,44 +9,58 @@ const NavLinks = () => {
   return (
     <ul className="nav-links flex justify-between text-white">
       <li className="p-3">
-        <Link className="hover:bg-hoverPurple p-3" to="/">
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? 'bg-hoverPurple p-3' : 'hover:bg-hoverPurple p-3'
+          }
+          to="/"
+        >
           All Users
-        </Link>
+        </NavLink>
       </li>
 
       {authContext.isLoggedIn && (
         <li className="p-3">
-          <Link
-            className="hover:bg-hoverPurple p-3"
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? 'bg-hoverPurple p-3' : 'hover:bg-hoverPurple p-3'
+            }
             to={`/${authContext.userId}/places`}
           >
             My Places
-          </Link>
+          </NavLink>
         </li>
       )}
 
       {authContext.isLoggedIn && (
         <li className="p-3">
-          <Link className="hover:bg-hoverPurple p-3" to="/places/new">
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? 'bg-hoverPurple p-3' : 'hover:bg-hoverPurple p-3'
+            }
+            to="/places/new"
+          >
             Add Place
-          </Link>
+          </NavLink>
         </li>
       )}
 
       {!authContext.isLoggedIn && (
         <li className="p-3">
-          <Link className="hover:bg-hoverPurple p-3" to="/auth">
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? 'bg-hoverPurple p-3' : 'hover:bg-hoverPurple p-3'
+            }
+            to="/auth"
+          >
             Login
-          </Link>
+          </NavLink>
         </li>
       )}
 
       {authContext.isLoggedIn && (
         <li>
-          <button
-            className="hover:bg-hoverPurple p-3"
-            onClick={authContext.logout}
-          >
+          <button className="bg-hoverPurple p-3" onClick={authContext.logout}>
             Logout
           </button>
         </li>

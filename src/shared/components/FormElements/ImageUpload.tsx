@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 
 import Button from './Button';
-import './ImageUpload.css';
 
 const ImageUpload = (props) => {
   const [file, setFile] = useState();
@@ -62,12 +61,30 @@ const ImageUpload = (props) => {
         accept=".jpg,.png,.jpeg"
         onChange={pickedHandler}
       />
-      <div className="image-upload flex flex-wrap items-center justify-center">
-        <div className="image-upload__preview flex items-center w-full">
-          {previewUrl && <img src={previewUrl} alt="Preview" />}
+      <div className="image-upload flex flex-wrap items-center justify-center flex-row">
+        <div
+          className="
+        image-upload__preview
+        flex items-center
+        text-center
+        mb-2
+        justify-center
+        items-center
+        border-2
+        border-purple
+        w-52
+        h-52"
+        >
+          {previewUrl && (
+            <img
+              src={previewUrl}
+              className="w-full h-full object-cover"
+              alt="Preview"
+            />
+          )}
           {!previewUrl && <p>Please pick an image.</p>}
         </div>
-        <Button type="button" onClick={pickImageHandler}>
+        <Button className="w-2/3" type="button" onClick={pickImageHandler}>
           PICK IMAGE
         </Button>
       </div>
