@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Input from '../../shared/components/FormElements/Input';
@@ -16,6 +16,7 @@ import AuthContext from '../../shared/context/auth-context';
 const NewPlace = () => {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
+  const [suggestions, setSuggestions] = useState([]);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [formState, inputHandler] = useForm(
     // formState and inputHandler are returned in the hook
@@ -35,6 +36,50 @@ const NewPlace = () => {
     },
     false
   );
+
+  useEffect(() => {
+    const searchInput = document.getElementById('address'); // Replace with the correct input field ID
+
+    if (!window.google.maps.places) {
+      // Google Maps API is not loaded yet, so add a listener for its load event
+      window.addEventListener('load', initializeSearchBox);
+    } else {
+      // Google Maps API is already loaded, so initialize the SearchBox directly
+      initializeSearchBox();
+    }
+
+    // Clean up the SearchBox when the component unmounts
+    return () => {
+      window.google?.maps.event.clearInstanceListeners(searchInput);
+    };
+
+    function initializeSearchBox() {
+      const searchBox = new window.google.maps.places.SearchBox(searchInput);
+
+      // Listen for place predictions
+      searchBox.addListener('places_changed', () => {
+        const places = searchBox.getPlaces();
+
+        if (places && places.length > 0) {
+          const suggestions = places.map((place) => ({
+            placeId: place.place_id,
+            description: place.formatted_address,
+          }));
+
+          // Set the suggestions in state
+          setSuggestions(suggestions);
+        }
+      });
+    }
+  }, []);
+
+  const handleSuggestionClick = (suggestion) => {
+    const addressInput = document.getElementById('address'); // Replace with the correct input field ID
+    if (addressInput) {
+      addressInput.value = suggestion.description;
+    }
+    setSuggestions([]); // Clear the suggestions
+  };
 
   const placeSubmitHandler = async (
     event: React.FormEvent<HTMLFormElement>
@@ -103,10 +148,24 @@ const NewPlace = () => {
           element="input"
           label="Address"
           id="address"
+          autoComplete="off" // Disable default browser autocomplete
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Please enter a valid address."
           onInput={inputHandler}
         />
+
+        {suggestions && suggestions.length > 0 && (
+          <ul>
+            {suggestions.map((suggestion) => (
+              <li
+                key={suggestion.placeId}
+                onClick={() => handleSuggestionClick(suggestion)}
+              >
+                {suggestion.description}
+              </li>
+            ))}
+          </ul>
+        )}
 
         <Button className="m-4" type="submit" disabled={!formState.isValid}>
           Add Place
