@@ -36,7 +36,7 @@ const MainNavigation = () => {
           <span className="block w-6 h-5 bg-white" />
           <span className="block w-6 h-5 bg-white" />
         </button>
-        <h1 className="main-navigation__title h-auto w-60 block relative">
+        <h1 className="main-navigation__title h-auto w-48 block relative">
           <Link to="/">
             <div>
               <img src={logo} className="App-logo" alt="Voyage Vault" />

@@ -15,6 +15,17 @@ const NavLinks = () => {
           }
           to="/"
         >
+          Home
+        </NavLink>
+      </li>
+
+      <li className="p-3">
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? 'bg-hoverPurple p-3' : 'hover:bg-hoverPurple p-3'
+          }
+          to="/users"
+        >
           All Users
         </NavLink>
       </li>

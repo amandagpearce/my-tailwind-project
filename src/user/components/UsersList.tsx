@@ -23,7 +23,7 @@ const UsersList: React.FC<UsersListProps> = (props) => {
   return (
     <Fragment>
       <h2 className="text-2xl mt-8 mb-4">
-        Check out these <b>user's places</b>
+        Check out these <b>users' places</b>
       </h2>
       <ul
         className={`
