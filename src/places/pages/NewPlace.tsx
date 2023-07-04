@@ -1,4 +1,10 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react';
+import React, {
+  Fragment,
+  useContext,
+  useEffect,
+  useState,
+  useRef,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Input from '../../shared/components/FormElements/Input';
@@ -12,11 +18,11 @@ import {
 import { useForm } from '../../shared/hooks/form-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import AuthContext from '../../shared/context/auth-context';
+import AutoComplete from './Autocomplete';
 
 const NewPlace = () => {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
-  const [suggestions, setSuggestions] = useState([]);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [formState, inputHandler] = useForm(
     // formState and inputHandler are returned in the hook
@@ -37,9 +43,10 @@ const NewPlace = () => {
     false
   );
 
-  useEffect(() => {
-    const searchInput = document.getElementById('address'); // Replace with the correct input field ID
+  const autoCompleteRef = useRef();
+  const inputRef = useRef();
 
+  useEffect(() => {
     if (!window.google.maps.places) {
       // Google Maps API is not loaded yet, so add a listener for its load event
       window.addEventListener('load', initializeSearchBox);
@@ -48,38 +55,17 @@ const NewPlace = () => {
       initializeSearchBox();
     }
 
-    // Clean up the SearchBox when the component unmounts
-    return () => {
-      window.google?.maps.event.clearInstanceListeners(searchInput);
-    };
-
     function initializeSearchBox() {
-      const searchBox = new window.google.maps.places.SearchBox(searchInput);
-
-      // Listen for place predictions
-      searchBox.addListener('places_changed', () => {
-        const places = searchBox.getPlaces();
-
-        if (places && places.length > 0) {
-          const suggestions = places.map((place) => ({
-            placeId: place.place_id,
-            description: place.formatted_address,
-          }));
-
-          // Set the suggestions in state
-          setSuggestions(suggestions);
-        }
+      autoCompleteRef.current = new window.google.maps.places.Autocomplete(
+        inputRef.current
+      );
+      autoCompleteRef.current.addListener('place_changed', async function () {
+        const place = await autoCompleteRef.current.getPlace();
+        console.log({ place });
+        inputHandler('address', place.formatted_address, true);
       });
     }
   }, []);
-
-  const handleSuggestionClick = (suggestion) => {
-    const addressInput = document.getElementById('address'); // Replace with the correct input field ID
-    if (addressInput) {
-      addressInput.value = suggestion.description;
-    }
-    setSuggestions([]); // Clear the suggestions
-  };
 
   const placeSubmitHandler = async (
     event: React.FormEvent<HTMLFormElement>
@@ -106,7 +92,7 @@ const NewPlace = () => {
   };
 
   return (
-    <Fragment>
+    <div className="px-8">
       <ErrorModal error={error} onClear={clearError} />
       <h2 className="text-center text-2xl mt-8 mb-4">Add new place</h2>
       <form
@@ -144,34 +130,33 @@ const NewPlace = () => {
           onInput={inputHandler}
         />
 
-        <Input
+        {/* <Input
           element="input"
           label="Address"
           id="address"
-          autoComplete="off" // Disable default browser autocomplete
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Please enter a valid address."
-          onInput={inputHandler}
-        />
+          ref={inputRef}
+        /> */}
 
-        {suggestions && suggestions.length > 0 && (
-          <ul>
-            {suggestions.map((suggestion) => (
-              <li
-                key={suggestion.placeId}
-                onClick={() => handleSuggestionClick(suggestion)}
-              >
-                {suggestion.description}
-              </li>
-            ))}
-          </ul>
-        )}
+        <div className="m-4">
+          <input
+            id="address"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Please enter a valid address."
+            placeholder="Enter the place name to locate the address"
+            ref={inputRef}
+            className="rounded border-2 border-purple mt-1 p-2 focus:border-darkCyan focus:outline-none w-full"
+          />
+        </div>
+
+        {/* <AutoComplete /> */}
 
         <Button className="m-4" type="submit" disabled={!formState.isValid}>
           Add Place
         </Button>
       </form>
-    </Fragment>
+    </div>
   );
 };
 
