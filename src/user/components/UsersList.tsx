@@ -21,7 +21,7 @@ const UsersList: React.FC<UsersListProps> = (props) => {
   }
 
   return (
-    <Fragment>
+    <div className="p-8">
       <h2 className="text-2xl mt-8 mb-4">
         Check out these <b>users' places</b>
       </h2>
@@ -50,7 +50,7 @@ const UsersList: React.FC<UsersListProps> = (props) => {
           />
         ))}
       </ul>
-    </Fragment>
+    </div>
   );
 };
 

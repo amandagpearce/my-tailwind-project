@@ -5,6 +5,7 @@ import PlaceList from '../components/PlaceList';
 import ErrorModal from '../../shared/components/UI/ErrorModal';
 import LoadingSpinner from '../../shared/components/UI/LoadingSpinner';
 import { useHttpClient } from '../../shared/hooks/http-hook';
+import bgImage from '../../../src/img/place-list-bg.jpg';
 
 interface Place {
   id: string;
@@ -49,7 +50,13 @@ const UserPlaces: React.FC = () => {
   };
 
   return (
-    <Fragment>
+    <div
+      className="px-8 h-full min-h-screen"
+      style={{
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: 'cover',
+      }}
+    >
       <ErrorModal error={error} onClear={clearError} />
       {isLoading && (
         <div className="h-screen flex items-center justify-center">
@@ -60,7 +67,9 @@ const UserPlaces: React.FC = () => {
       {!isLoading && loadedPlaces && (
         <PlaceList items={loadedPlaces} onDeletePlace={placeDeletedHandler} />
       )}
-    </Fragment>
+
+      {!isLoading && !loadedPlaces && <PlaceList items={[]} />}
+    </div>
   );
 };
 

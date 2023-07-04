@@ -98,7 +98,7 @@ const UpdatePlace: React.FC = () => {
   }
 
   return (
-    <React.Fragment>
+    <div className="px-8">
       <ErrorModal error={error} onClear={clearError} />
       {!isLoading && loadedPlace && (
         <form
@@ -142,7 +142,7 @@ const UpdatePlace: React.FC = () => {
           </Button>
         </form>
       )}
-    </React.Fragment>
+    </div>
   );
 };
 

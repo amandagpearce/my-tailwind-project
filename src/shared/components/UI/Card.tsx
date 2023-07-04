@@ -9,7 +9,7 @@ interface CardProps {
 const Card: React.FC<CardProps> = (props) => {
   return (
     <div
-      className={`card ${props.className} ${props.style} mx-auto h-full overflow-hidden bg-white rounded-lg m-0 shadow-black/25`}
+      className={`card ${props.style} mx-auto h-full overflow-hidden rounded-lg m-0 shadow-black/25 ${props.className}`}
     >
       {props.children}
     </div>

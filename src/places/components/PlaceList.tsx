@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Card from '../../shared/components/UI/Card';
 import PlaceItem from './PlaceItem';
 import Button from '../../shared/components/FormElements/Button';
+
+import AuthContext from '../../shared/context/auth-context';
 
 interface Place {
   id: string;
@@ -22,6 +24,8 @@ interface PlaceListProps {
 }
 
 const PlaceList: React.FC<PlaceListProps> = (props) => {
+  const authContext = useContext(AuthContext);
+
   if (props.items?.length === 0) {
     return (
       <div
@@ -29,22 +33,27 @@ const PlaceList: React.FC<PlaceListProps> = (props) => {
             place-list
             list-none
             w-full
-            m-4
-            p-0
-            max-w-2xl
+            m-0
+            p-4
             self-center
+            bg-transparent
         `}
       >
-        <Card>
-          <h2>No places found. Maybe create one?</h2>
-          <Button to="/places/new">Add new Place</Button>
+        <Card className="rounded-none flex flex-wrap items-center justify-center w-full bg-transparent">
+          <h2 className="text-2xl text-white text-center w-full mb-4">
+            No places found. Maybe create one?
+          </h2>
+          {authContext.isLoggedIn && (
+            <Button to="/places/new">Add new Place</Button>
+          )}
+          {!authContext.isLoggedIn && <Button to="/auth">Login</Button>}
         </Card>
       </div>
     );
   }
 
   return (
-    <ul className="place-list m-8">
+    <ul className="place-list p-8">
       {props.items?.map((place) => (
         <PlaceItem
           key={place.id}
