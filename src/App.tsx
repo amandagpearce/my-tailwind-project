@@ -1,5 +1,5 @@
 import React, { Fragment, useCallback, useState } from 'react';
-import { Route, useNavigate, Routes } from 'react-router-dom';
+import { Route, useNavigate, Routes, useParams } from 'react-router-dom';
 
 import Users from './user/pages/Users';
 import NewPlace from './places/pages/NewPlace';
@@ -26,6 +26,11 @@ const App: React.FC = () => {
     setUserId(null);
   }, []);
 
+  const UserPlacesWrapper = () => {
+    const { userId } = useParams();
+    return <UserPlaces userId={userId} />;
+  };
+
   const navigate = useNavigate();
   let routes;
   console.log('isLoggedIn', isLoggedIn);
@@ -33,20 +38,20 @@ const App: React.FC = () => {
   if (isLoggedIn) {
     routes = (
       <Routes>
-        <Route path="/:userId/places" element={<UserPlaces />} />
-        <Route path="/places/new" element={<NewPlace />} />
-        <Route path="/places/:placeId" element={<UpdatePlace />} />
-        <Route path="/users" element={<Users />} />
-        <Route path="/" element={<Home />} />
+        <Route path=":userId/places" element={<UserPlacesWrapper />} />
+        <Route path="places/new" element={<NewPlace />} />
+        <Route path="places/:placeId" element={<UpdatePlace />} />
+        <Route path="users" element={<Users />} />
+        <Route path="" element={<Home />} />
       </Routes>
     );
   } else {
     routes = (
       <Routes>
-        <Route path="/:userId/places" element={<UserPlaces />} />
-        <Route path="/auth" element={<Auth />} />
-        <Route path="/users" element={<Users />} />
-        <Route path="/" element={<Home />} />
+        <Route path=":userId/places" element={<UserPlacesWrapper />} />
+        <Route path="auth" element={<Auth />} />
+        <Route path="users" element={<Users />} />
+        <Route path="" element={<Home />} />
       </Routes>
     );
   }
@@ -62,7 +67,7 @@ const App: React.FC = () => {
         }}
       >
         <MainNavigation />
-        <main className="mx-auto px-8">{routes}</main>
+        <main className="mx-auto">{routes}</main>
       </AuthContext.Provider>
     </Fragment>
   );
