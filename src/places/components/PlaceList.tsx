@@ -53,7 +53,20 @@ const PlaceList: React.FC<PlaceListProps> = (props) => {
   }
 
   return (
-    <ul className="place-list p-8">
+    <ul
+      className={`
+        place-list
+        p-8
+        list-none
+        w-full
+        grid
+        sm:grid-cols-1
+        md:grid-cols-2
+        lg:grid-cols-4
+        auto-cols-fr
+        gap-4
+    `}
+    >
       {props.items?.map((place) => (
         <PlaceItem
           key={place.id}

@@ -97,43 +97,47 @@ const PlaceItem: React.FC<PlaceItemProps> = (props) => {
         <p>Do you really want to delete? This can't be undone.</p>
       </Modal>
 
-      <li className="place-item m-2">
-        <Card className="place-item__content p-0">
+      <li className="place-item m-2 h-full">
+        <Card className="place-item__content p-0 relative flex flex-wrap bg-white">
           {isLoading && <LoadingSpinner asOverlay />}
-          <div className="place-item__image w-full h-36 mr-3 md:h-80">
+          <div className="place-item__image w-full h-36 md:h-80">
             <img
               src={props.image}
               alt={props.title}
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="place-item__info p-4 text-center">
-            <h2 className="text-xl mt-0 mr-0 mb-1 ml-0">{props.title}</h2>
-            <h3 className="text-base mt-0 mr-0 mb-1 ml-0">{props.address}</h3>
-            <p className="text-base mt-0 mr-0 mb-1 ml-0">{props.description}</p>
-          </div>
-          <div className="place-item__actions p-4 text-center border-t-4 border-purple">
-            <Button className="m-1" inverse onClick={openMapHandler}>
-              VIEW ON MAP
-            </Button>
+          <div className="place-item__bellow-image-container flex flex-wrap">
+            <div className="place-item__info p-4 text-center">
+              <h2 className="text-xl mt-0 mr-0 mb-1 ml-0">{props.title}</h2>
+              <h3 className="text-base mt-0 mr-0 mb-1 ml-0">{props.address}</h3>
+              <p className="text-base mt-0 mr-0 mb-1 ml-0">
+                {props.description}
+              </p>
+            </div>
+            <div className="place-item__actions p-4 text-center border-t-2 border-purple w-full self-end">
+              <Button className="m-1" inverse onClick={openMapHandler}>
+                VIEW ON MAP
+              </Button>
 
-            {authContext.userId === props.creatorId && (
-              <React.Fragment>
-                <Button
-                  className="m-1 bg-yellow-600"
-                  to={`/places/${props.id}`}
-                >
-                  EDIT
-                </Button>
-                <Button
-                  className="m-1 bg-red-600"
-                  danger
-                  onClick={showDeleteWarningHandler}
-                >
-                  DELETE
-                </Button>
-              </React.Fragment>
-            )}
+              {authContext.userId === props.creatorId && (
+                <React.Fragment>
+                  <Button
+                    className="m-1 bg-yellow-600"
+                    to={`/places/${props.id}`}
+                  >
+                    EDIT
+                  </Button>
+                  <Button
+                    className="m-1 bg-red-600"
+                    danger
+                    onClick={showDeleteWarningHandler}
+                  >
+                    DELETE
+                  </Button>
+                </React.Fragment>
+              )}
+            </div>
           </div>
         </Card>
       </li>
