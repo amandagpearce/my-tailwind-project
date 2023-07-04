@@ -10,7 +10,7 @@ import {
   VALIDATOR_REQUIRE,
 } from '../../shared/util/validators';
 import { useForm } from '../../shared/hooks/form-hook';
-import './Auth.css';
+
 import AuthContext from '../../shared/context/auth-context';
 import ErrorModal from '../../shared/components/UI/ErrorModal';
 import LoadingSpinner from '../../shared/components/UI/LoadingSpinner';
@@ -111,9 +111,9 @@ const Auth = () => {
   };
 
   return (
-    <Fragment>
+    <div className="pb-4">
       <ErrorModal error={error} onClear={clearError} />
-      <Card className="authentication p-4 m-14 shadow-lg">
+      <Card className="authentication p-4 m-14 shadow-lg h-auto w-1/4">
         {isLoading && <LoadingSpinner asOverlay />}
 
         <h2 className="text-xl pb-4">
@@ -157,15 +157,22 @@ const Auth = () => {
             errorText="Please enter a valid password, at least 6 characters."
             onInput={inputHandler}
           />
-          <Button type="submit" disabled={!formState.isValid}>
+          <Button
+            type="submit"
+            className="mx-auto table mb-4"
+            disabled={!formState.isValid}
+          >
             {isLoginMode ? 'LOGIN' : 'SIGNUP'}
           </Button>
         </form>
-        <Button inverse onClick={switchModeHandler}>
+        <Button
+          className="mx-auto table bg-orange-600 hover:bg-orange-500"
+          onClick={switchModeHandler}
+        >
           SWITCH TO {isLoginMode ? 'SIGNUP' : 'LOGIN'}
         </Button>
       </Card>
-    </Fragment>
+    </div>
   );
 };
 
