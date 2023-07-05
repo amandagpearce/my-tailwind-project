@@ -15,7 +15,7 @@ const UsersList: React.FC<UsersListProps> = (props) => {
   if (props.items.length === 0) {
     return (
       <div className="text-center">
-        <h2>No users found.</h2>
+        <h2 className="m-8 text-xl">No users found.</h2>
       </div>
     );
   }

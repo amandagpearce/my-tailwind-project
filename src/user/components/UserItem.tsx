@@ -27,8 +27,12 @@ const UserItem: React.FC<UserItemProps> = (props) => {
           hover:bg-gray-100
           "
         >
-          <div className="user-item__image w-1/4 mr-4">
-            <Avatar image={props.image} alt={props.name} width="14" />
+          <div className="user-item__image w-24 mr-4">
+            <Avatar
+              image={`http://localhost:5000/${props.image}`}
+              alt={props.name}
+              style={{ width: '95px', height: '95px' }}
+            />
           </div>
 
           <div className="user-item__info w-2/4 m-l-2">
