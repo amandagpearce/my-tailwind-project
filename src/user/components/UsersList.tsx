@@ -22,7 +22,7 @@ const UsersList: React.FC<UsersListProps> = (props) => {
 
   return (
     <div className="p-8">
-      <h2 className="text-2xl mt-8 mb-4">
+      <h2 className="text-2xl mt-2 mb-4">
         Check out these <b>users' places</b>
       </h2>
       <ul

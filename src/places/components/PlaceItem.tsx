@@ -98,7 +98,7 @@ const PlaceItem: React.FC<PlaceItemProps> = (props) => {
       </Modal>
 
       <li className="place-item m-2 h-full">
-        <Card className="place-item__content p-0 relative flex flex-wrap bg-white">
+        <Card className="place-item__content p-0 relative flex flex-wrap bg-white items-start flex-col">
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="place-item__image w-full h-36 md:h-80">
             <img
@@ -107,37 +107,33 @@ const PlaceItem: React.FC<PlaceItemProps> = (props) => {
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="place-item__bellow-image-container flex flex-wrap">
-            <div className="place-item__info p-4 text-center">
-              <h2 className="text-xl mt-0 mr-0 mb-1 ml-0">{props.title}</h2>
-              <h3 className="text-base mt-0 mr-0 mb-1 ml-0">{props.address}</h3>
-              <p className="text-base mt-0 mr-0 mb-1 ml-0">
-                {props.description}
-              </p>
-            </div>
-            <div className="place-item__actions p-4 text-center border-t-2 border-purple w-full self-end">
-              <Button className="m-1" inverse onClick={openMapHandler}>
-                VIEW ON MAP
-              </Button>
+          <div className="place-item__info p-4 text-left">
+            <h2 className="text-xl mt-0 mr-0 mb-1 ml-0">{props.title}</h2>
+            <h3 className="text-base mt-0 mr-0 mb-1 ml-0">{props.address}</h3>
+            <p className="text-base mt-0 mr-0 mb-1 ml-0">{props.description}</p>
+          </div>
+          <div className="place-item__actions p-4 text-center text-sm border-t-2 border-purple w-full self-end mt-auto">
+            <Button className="m-1" inverse onClick={openMapHandler}>
+              VIEW ON MAP
+            </Button>
 
-              {authContext.userId === props.creatorId && (
-                <React.Fragment>
-                  <Button
-                    className="m-1 bg-yellow-600"
-                    to={`/places/${props.id}`}
-                  >
-                    EDIT
-                  </Button>
-                  <Button
-                    className="m-1 bg-red-600"
-                    danger
-                    onClick={showDeleteWarningHandler}
-                  >
-                    DELETE
-                  </Button>
-                </React.Fragment>
-              )}
-            </div>
+            {authContext.userId === props.creatorId && (
+              <React.Fragment>
+                <Button
+                  className="m-1 bg-yellow-600 hover:yellow-500"
+                  to={`/places/${props.id}`}
+                >
+                  EDIT
+                </Button>
+                <Button
+                  className="m-1 bg-red-600 hover:red-500"
+                  danger
+                  onClick={showDeleteWarningHandler}
+                >
+                  DELETE
+                </Button>
+              </React.Fragment>
+            )}
           </div>
         </Card>
       </li>

@@ -11,7 +11,9 @@ const NavLinks = () => {
       <li className="p-3">
         <NavLink
           className={({ isActive }) =>
-            isActive ? 'bg-hoverPurple p-3' : 'hover:bg-hoverPurple p-3'
+            isActive
+              ? 'bg-hoverPurple p-3 text-sm'
+              : 'hover:bg-hoverPurple p-3 text-sm'
           }
           to="/"
         >
@@ -22,7 +24,9 @@ const NavLinks = () => {
       <li className="p-3">
         <NavLink
           className={({ isActive }) =>
-            isActive ? 'bg-hoverPurple p-3' : 'hover:bg-hoverPurple p-3'
+            isActive
+              ? 'bg-hoverPurple p-3 text-sm'
+              : 'hover:bg-hoverPurple p-3 text-sm'
           }
           to="/users"
         >
@@ -34,7 +38,9 @@ const NavLinks = () => {
         <li className="p-3">
           <NavLink
             className={({ isActive }) =>
-              isActive ? 'bg-hoverPurple p-3' : 'hover:bg-hoverPurple p-3'
+              isActive
+                ? 'bg-hoverPurple p-3 text-sm'
+                : 'hover:bg-hoverPurple p-3 text-sm'
             }
             to={`/${authContext.userId}/places`}
           >
@@ -47,7 +53,9 @@ const NavLinks = () => {
         <li className="p-3">
           <NavLink
             className={({ isActive }) =>
-              isActive ? 'bg-hoverPurple p-3' : 'hover:bg-hoverPurple p-3'
+              isActive
+                ? 'bg-hoverPurple p-3 text-sm'
+                : 'hover:bg-hoverPurple p-3 text-sm'
             }
             to="/places/new"
           >
