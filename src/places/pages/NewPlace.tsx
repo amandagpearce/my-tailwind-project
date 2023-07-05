@@ -11,6 +11,8 @@ import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
 import ErrorModal from '../../shared/components/UI/ErrorModal';
 import LoadingSpinner from '../../shared/components/UI/LoadingSpinner';
+import ImageUpload from '../../shared/components/FormElements/ImageUpload';
+
 import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE,
@@ -18,7 +20,6 @@ import {
 import { useForm } from '../../shared/hooks/form-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import AuthContext from '../../shared/context/auth-context';
-import AutoComplete from './Autocomplete';
 
 const NewPlace = () => {
   const navigate = useNavigate();
@@ -37,6 +38,10 @@ const NewPlace = () => {
       },
       address: {
         value: '',
+        isValid: false,
+      },
+      image: {
+        value: null,
         isValid: false,
       },
     },
@@ -71,19 +76,15 @@ const NewPlace = () => {
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
-    console.log('ta dah', formState.inputs);
     try {
-      await sendRequest(
-        'http://localhost:5000/api/places',
-        'POST',
-        JSON.stringify({
-          title: formState.inputs.title.value,
-          description: formState.inputs.description.value,
-          address: formState.inputs.address.value,
-          creator: authContext.userId,
-        }),
-        { 'Content-Type': 'application/json' }
-      );
+      const formData = new FormData();
+      formData.append('title', formState.inputs.title.value);
+      formData.append('description', formState.inputs.description.value);
+      formData.append('address', formState.inputs.address.value);
+      formData.append('creator', authContext.userId);
+      formData.append('image', formState.inputs.image.value);
+
+      await sendRequest('http://localhost:5000/api/places', 'POST', formData);
 
       navigate('/');
     } catch (err) {
@@ -130,14 +131,11 @@ const NewPlace = () => {
           onInput={inputHandler}
         />
 
-        {/* <Input
-          element="input"
-          label="Address"
-          id="address"
-          validators={[VALIDATOR_REQUIRE()]}
-          errorText="Please enter a valid address."
-          ref={inputRef}
-        /> */}
+        <ImageUpload
+          id="image"
+          onInput={inputHandler}
+          errorText="Please provide an image."
+        />
 
         <div className="m-4">
           <input
@@ -149,8 +147,6 @@ const NewPlace = () => {
             className="rounded border-2 border-purple mt-1 p-2 focus:border-darkCyan focus:outline-none w-full"
           />
         </div>
-
-        {/* <AutoComplete /> */}
 
         <Button className="m-4" type="submit" disabled={!formState.isValid}>
           Add Place

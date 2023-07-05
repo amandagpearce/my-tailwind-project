@@ -102,7 +102,7 @@ const PlaceItem: React.FC<PlaceItemProps> = (props) => {
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="place-item__image w-full h-36 md:h-80">
             <img
-              src={props.image}
+              src={`http://localhost:5000/${props.image}`}
               alt={props.title}
               className="w-full h-full object-cover"
             />
