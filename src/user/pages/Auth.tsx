@@ -84,8 +84,9 @@ const Auth = () => {
           }),
           { 'Content-Type': 'application/json' } // without this the backend does not know what type of data they are receiving
         );
+        console.log('responseData', responseData);
 
-        authContext.login(responseData.user.id);
+        authContext.login(responseData.userId, responseData.token);
         navigate('/');
       } catch (err) {}
     } else {
@@ -102,8 +103,7 @@ const Auth = () => {
           'POST',
           formData // no need to set headers manually when sending FormData
         );
-
-        authContext.login(responseData.user.id);
+        authContext.login(responseData.userId, responseData.token);
         navigate('/');
       } catch (error) {}
     }

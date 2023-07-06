@@ -72,6 +72,7 @@ const UpdatePlace: React.FC = () => {
         }),
         {
           'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + auth.token,
         }
       );
 

@@ -81,12 +81,13 @@ const NewPlace = () => {
       formData.append('title', formState.inputs.title.value);
       formData.append('description', formState.inputs.description.value);
       formData.append('address', formState.inputs.address.value);
-      formData.append('creator', authContext.userId);
       formData.append('image', formState.inputs.image.value);
 
-      await sendRequest('http://localhost:5000/api/places', 'POST', formData);
+      await sendRequest('http://localhost:5000/api/places', 'POST', formData, {
+        Authorization: 'Bearer ' + authContext.token,
+      });
 
-      navigate('/');
+      navigate(`/${authContext.userId}/places`);
     } catch (err) {
       console.log('err', err);
     }
@@ -141,7 +142,6 @@ const NewPlace = () => {
           <input
             id="address"
             validators={[VALIDATOR_REQUIRE()]}
-            errorText="Please enter a valid address."
             placeholder="Enter the place name to locate the address"
             ref={inputRef}
             className="rounded border-2 border-purple mt-1 p-2 focus:border-darkCyan focus:outline-none w-full"

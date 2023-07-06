@@ -1,5 +1,5 @@
-import React, { Fragment, useCallback, useState } from 'react';
-import { Route, useNavigate, Routes, useParams } from 'react-router-dom';
+import React, { Fragment } from 'react';
+import { Route, Routes, useParams } from 'react-router-dom';
 
 import Users from './user/pages/Users';
 import NewPlace from './places/pages/NewPlace';
@@ -10,39 +10,29 @@ import AuthContext from './shared/context/auth-context';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import Home from './shared/pages/home';
 
+import useAuth from './shared/hooks/auth-hook';
+
 import './App.css';
 
 const App: React.FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
-  const [userId, setUserId] = useState();
-
-  const login = useCallback((uid) => {
-    setIsLoggedIn(true);
-    setUserId(uid);
-  }, []);
-
-  const logout = useCallback(() => {
-    setIsLoggedIn(false);
-    setUserId(null);
-  }, []);
+  const { token, login, logout, userId } = useAuth();
+  let routes;
+  console.log('token', token);
 
   const UserPlacesWrapper = () => {
     const { userId } = useParams();
+    console.log('userId', userId);
     return <UserPlaces userId={userId} />;
   };
 
-  const navigate = useNavigate();
-  let routes;
-  console.log('isLoggedIn', isLoggedIn);
-
-  if (isLoggedIn) {
+  if (token) {
     routes = (
       <Routes>
         <Route path=":userId/places" element={<UserPlacesWrapper />} />
         <Route path="places/new" element={<NewPlace />} />
         <Route path="places/:placeId" element={<UpdatePlace />} />
         <Route path="users" element={<Users />} />
-        <Route path="" element={<Home />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     );
   } else {
@@ -51,7 +41,7 @@ const App: React.FC = () => {
         <Route path=":userId/places" element={<UserPlacesWrapper />} />
         <Route path="auth" element={<Auth />} />
         <Route path="users" element={<Users />} />
-        <Route path="" element={<Home />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     );
   }
@@ -60,7 +50,8 @@ const App: React.FC = () => {
     <Fragment>
       <AuthContext.Provider
         value={{
-          isLoggedIn: isLoggedIn ?? false,
+          isLoggedIn: !!token,
+          token: token,
           userId: userId,
           login,
           logout,
