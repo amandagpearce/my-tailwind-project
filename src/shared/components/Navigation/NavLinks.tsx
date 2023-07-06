@@ -79,7 +79,10 @@ const NavLinks = () => {
 
       {authContext.isLoggedIn && (
         <li>
-          <button className="p-3" onClick={authContext.logout}>
+          <button
+            className="p-3 text-sm mt-1 underline"
+            onClick={authContext.logout}
+          >
             Logout
           </button>
         </li>
