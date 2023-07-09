@@ -29,7 +29,7 @@ const UserItem: React.FC<UserItemProps> = (props) => {
         >
           <div className="user-item__image w-24 mr-4">
             <Avatar
-              image={`http://localhost:5000/${props.image}`}
+              image={`${process.env.REACT_ASSET_URL}/${props.image}`}
               alt={props.name}
               style={{ width: '95px', height: '95px' }}
             />

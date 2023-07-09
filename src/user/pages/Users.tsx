@@ -20,9 +20,10 @@ const Users: React.FC = () => {
     const fetchUsers = async () => {
       try {
         const responseData = await sendRequest(
-          'http://localhost:5000/api/users/'
+          `${process.env.REACT_BACKEND_URL}/users/`
         );
 
+        console.log('aaa', responseData.users);
         setLoadedUsers(responseData.users);
       } catch (err) {}
     };

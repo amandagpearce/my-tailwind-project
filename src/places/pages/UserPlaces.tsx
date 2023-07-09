@@ -29,10 +29,9 @@ const UserPlaces: React.FC = () => {
 
   useEffect(() => {
     const fetchPlaces = async () => {
-      // using an IIFE to not make the use effect function async which would be a bad practice
       try {
         const responseData = await sendRequest(
-          `http://localhost:5000/api/places/user/${userId}`,
+          `${process.env.REACT_BACKEND_URL}/places/user/${userId}`,
           'GET'
         );
 
@@ -57,7 +56,8 @@ const UserPlaces: React.FC = () => {
         backgroundSize: 'cover',
       }}
     >
-      <ErrorModal error={error} onClear={clearError} />
+      {/* <ErrorModal error={error} onClear={clearError} /> */}
+
       {isLoading && (
         <div className="h-screen flex items-center justify-center">
           <LoadingSpinner asOverlay />

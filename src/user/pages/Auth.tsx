@@ -76,7 +76,7 @@ const Auth = () => {
     if (isLoginMode) {
       try {
         const responseData = await sendRequest(
-          'http://localhost:5000/api/users/login',
+          `${process.env.REACT_BACKEND_URL}/users/login`,
           'POST',
           JSON.stringify({
             email: formState.inputs.email.value,
@@ -99,7 +99,7 @@ const Auth = () => {
         formData.append('image', formState.inputs.image.value); // image key is expected in BE
 
         const responseData = await sendRequest(
-          'http://localhost:5000/api/users/signup',
+          `${process.env.REACT_BACKEND_URL}/users/signup`,
           'POST',
           formData // no need to set headers manually when sending FormData
         );

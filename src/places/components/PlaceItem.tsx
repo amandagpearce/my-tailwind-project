@@ -53,7 +53,7 @@ const PlaceItem: React.FC<PlaceItemProps> = (props) => {
 
     try {
       await sendRequest(
-        `http://localhost:5000/api/places/${props.id}`,
+        `${process.env.REACT_BACKEND_URL}/places/${props.id}`,
         'DELETE',
         null,
         {
@@ -106,7 +106,7 @@ const PlaceItem: React.FC<PlaceItemProps> = (props) => {
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="place-item__image w-full h-36 md:h-80">
             <img
-              src={`http://localhost:5000/${props.image}`}
+              src={`${process.env.REACT_ASSET_URL}/${props.image}`}
               alt={props.title}
               className="w-full h-full object-cover"
             />
@@ -124,13 +124,13 @@ const PlaceItem: React.FC<PlaceItemProps> = (props) => {
             {authContext.userId === props.creatorId && (
               <>
                 <Button
-                  className="m-1 bg-yellow-600 hover:yellow-500"
+                  className="m-1 bg-yellow-600 hover:bg-yellow-500"
                   to={`/places/${props.id}`}
                 >
                   EDIT
                 </Button>
                 <Button
-                  className="m-1 bg-red-600 hover:red-500"
+                  className="m-1 bg-red-700 hover:bg-red-600"
                   danger
                   onClick={showDeleteWarningHandler}
                 >
