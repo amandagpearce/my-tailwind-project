@@ -8,13 +8,13 @@ const Home: React.FC = () => {
       imageSrc: '/carousel/home.jpg',
       title: "Keep Track of all places you'll visit in that trip",
       ctaText: 'Get Started',
-      ctaLink: '',
+      ctaLink: '/auth',
     },
     {
       imageSrc: '/carousel/home-2.jpg',
       title: "View all places in a map add the info you'll need",
-      ctaText: 'Login',
-      ctaLink: '',
+      ctaText: 'Get Started',
+      ctaLink: '/auth',
     },
   ];
 
