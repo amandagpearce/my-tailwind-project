@@ -10,7 +10,7 @@
     "build": "cross-env env-cmd -f environments/.env webpack --mode=production",
     "build:dev": "cross-env env-cmd -f environments/.env.development webpack --mode=development",
     "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build",
+    "deploy" : "gh-pages -d dist",
     "tscheck": "tsc"
   },
   "author": "Amanda Pearce",
