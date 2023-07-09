@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
 
-import Users from './user/pages/Users';
-import NewPlace from './places/pages/NewPlace';
-import UserPlaces from './places/pages/UserPlaces';
-import UpdatePlace from './places/pages/UpdatePlace';
-import Auth from './user/pages/Auth';
-import AuthContext from './shared/context/auth-context';
-import MainNavigation from './shared/components/Navigation/MainNavigation';
-import Home from './shared/pages/Home';
+const Home = React.lazy(() => import('./shared/pages/Home'));
+const Users = React.lazy(() => import('./user/pages/Users'));
+const NewPlace = React.lazy(() => import('./places/pages/NewPlace'));
+const UpdatePlace = React.lazy(() => import('./places/pages/UpdatePlace'));
+const UserPlaces = React.lazy(() => import('./places/pages/UserPlaces'));
+const Auth = React.lazy(() => import('./user/pages/Auth'));
 
+import AuthContext from './shared/context/auth-context';
 import useAuth from './shared/hooks/auth-hook';
+import MainNavigation from './shared/components/Navigation/MainNavigation';
+import LoadingSpinner from './shared/components/UI/LoadingSpinner';
 
 import './App.css';
 
@@ -58,7 +59,17 @@ const App: React.FC = () => {
         }}
       >
         <MainNavigation />
-        <main className="mx-auto">{routes}</main>
+        <main className="mx-auto">
+          <Suspense
+            fallback={
+              <div className="mx-auto">
+                <LoadingSpinner asOverlay />
+              </div>
+            }
+          >
+            {routes}
+          </Suspense>
+        </main>
       </AuthContext.Provider>
     </>
   );
