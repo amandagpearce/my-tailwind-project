@@ -1,4 +1,6 @@
 module.exports = {
+  mode: 'jit', // Enable JIT mode
+  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   content: ['./src/**/*.{ts,tsx}', './public/index.html'],
   theme: {
     fontFamily: {
@@ -9,6 +11,7 @@ module.exports = {
       spacing: {
         '8xl': '96rem',
         '9xl': '128rem',
+        header: '8rem', // Adjust the value as needed
       },
       colors: {
         white: '#FFF',
@@ -17,6 +20,17 @@ module.exports = {
       },
       screens: {
         xs: '320px',
+      },
+      fontFamily: {
+        sans: ['Open Sans', 'sans-serif'],
+        display: ['Staatliches', 'sans-serif'],
+      },
+      fontWeight: {
+        normal: 400,
+        bold: 700,
+      },
+      fontSize: {
+        '8xl': '6.875rem',
       },
     },
   },
