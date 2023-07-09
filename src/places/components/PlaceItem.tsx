@@ -66,7 +66,7 @@ const PlaceItem: React.FC<PlaceItemProps> = (props) => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <ErrorModal error={error} onClear={clearError} />
 
       <Modal
@@ -88,14 +88,14 @@ const PlaceItem: React.FC<PlaceItemProps> = (props) => {
         header="Are you sure?"
         footerClass="place-item__modal-actions"
         footer={
-          <React.Fragment>
+          <>
             <Button className="m-1" onClick={cancelDeleteHandler}>
               Cancel
             </Button>
             <Button className="m-1 bg-red-600" onClick={confirmDeleteHandler}>
               Delete
             </Button>
-          </React.Fragment>
+          </>
         }
       >
         <p>Do you really want to delete? This can't be undone.</p>
@@ -122,7 +122,7 @@ const PlaceItem: React.FC<PlaceItemProps> = (props) => {
             </Button>
 
             {authContext.userId === props.creatorId && (
-              <React.Fragment>
+              <>
                 <Button
                   className="m-1 bg-yellow-600 hover:yellow-500"
                   to={`/places/${props.id}`}
@@ -136,12 +136,12 @@ const PlaceItem: React.FC<PlaceItemProps> = (props) => {
                 >
                   DELETE
                 </Button>
-              </React.Fragment>
+              </>
             )}
           </div>
         </Card>
       </li>
-    </React.Fragment>
+    </>
   );
 };
 

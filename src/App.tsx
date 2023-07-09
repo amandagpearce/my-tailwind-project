@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
 
 import Users from './user/pages/Users';
@@ -8,7 +8,7 @@ import UpdatePlace from './places/pages/UpdatePlace';
 import Auth from './user/pages/Auth';
 import AuthContext from './shared/context/auth-context';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
-import Home from './shared/pages/home';
+import Home from './shared/pages/Home';
 
 import useAuth from './shared/hooks/auth-hook';
 
@@ -47,7 +47,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <AuthContext.Provider
         value={{
           isLoggedIn: !!token,
@@ -60,7 +60,7 @@ const App: React.FC = () => {
         <MainNavigation />
         <main className="mx-auto">{routes}</main>
       </AuthContext.Provider>
-    </Fragment>
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import UsersList from '../components/UsersList';
 import ErrorModal from '../../shared/components/UI/ErrorModal';
@@ -31,7 +31,7 @@ const Users: React.FC = () => {
   }, [sendRequest]);
 
   return (
-    <Fragment>
+    <>
       <ErrorModal error={error} onClear={clearError} />
       {isLoading && (
         <div className="h-screen flex items-center justify-center">
@@ -39,7 +39,7 @@ const Users: React.FC = () => {
         </div>
       )}
       {!isLoading && loadedUsers && <UsersList items={loadedUsers} />}
-    </Fragment>
+    </>
   );
 };
 
