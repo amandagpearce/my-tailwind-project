@@ -9,8 +9,6 @@
     "start": "cross-env env-cmd -f environments/.env.development webpack serve --mode=development",
     "build": "cross-env env-cmd -f environments/.env webpack --mode=production",
     "build:dev": "cross-env env-cmd -f environments/.env.development webpack --mode=development",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d dist",
     "tscheck": "tsc"
   },
   "author": "Amanda Pearce",
@@ -44,7 +42,6 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-typescript": "^0.14.0",
     "file-loader": "^6.2.0",
-    "gh-pages": "^5.0.0",
     "null-loader": "^4.0.1",
     "path": "^0.12.7",
     "postcss": "^8.4.24",
