@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
 
-const Home = React.lazy(() => import('./shared/pages/Home'));
+import Home from './shared/pages/Home';
 const Users = React.lazy(() => import('./user/pages/Users'));
 const NewPlace = React.lazy(() => import('./places/pages/NewPlace'));
 const UpdatePlace = React.lazy(() => import('./places/pages/UpdatePlace'));

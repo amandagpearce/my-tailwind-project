@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (env, options) => {
   const isDevelopment = options.mode === 'development';
@@ -18,7 +20,9 @@ module.exports = (env, options) => {
     entry: './src/index.tsx',
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'main.js',
+      filename: 'main.[contenthash].js',
+      assetModuleFilename: 'img/[name][ext]',
+      publicPath: '/',
     },
     target: 'web',
     devServer: {
@@ -28,6 +32,11 @@ module.exports = (env, options) => {
       open: true,
       hot: true,
       liveReload: true,
+    },
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+      },
     },
     resolve: {
       /** "extensions"
@@ -68,6 +77,13 @@ module.exports = (env, options) => {
             },
           ],
         },
+        {
+          test: /\.(png|jpe?g|gif)$/i,
+          type: 'asset/resource',
+          generator: {
+            filename: 'img/[name][ext]',
+          },
+        },
       ],
     },
     plugins: [
@@ -79,6 +95,14 @@ module.exports = (env, options) => {
         'REACT_BACKEND_URL',
         'REACT_ASSET_URL',
       ]),
+      new HtmlWebPackPlugin({
+        template: './public/index.html',
+        filename: './index.html',
+        inject: true,
+      }),
+      new CopyWebpackPlugin({
+        patterns: [{ from: 'public/img', to: 'img' }],
+      }),
     ],
   };
 };

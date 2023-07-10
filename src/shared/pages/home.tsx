@@ -5,13 +5,13 @@ import Button from '../components/FormElements/Button';
 const Home: React.FC = () => {
   const slides = [
     {
-      imageSrc: '/carousel/home.jpg',
+      imageSrc: 'img/carousel/home.jpg',
       title: "Keep Track of all places you'll visit in that trip",
       ctaText: 'Get Started',
       ctaLink: '/auth',
     },
     {
-      imageSrc: '/carousel/home-2.jpg',
+      imageSrc: 'img/carousel/home-2.jpg',
       title: "View all places in a map add the info you'll need",
       ctaText: 'Get Started',
       ctaLink: '/auth',

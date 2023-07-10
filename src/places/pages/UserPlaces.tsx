@@ -5,7 +5,6 @@ import PlaceList from '../components/PlaceList';
 import ErrorModal from '../../shared/components/UI/ErrorModal';
 import LoadingSpinner from '../../shared/components/UI/LoadingSpinner';
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import bgImage from '../../../src/img/place-list-bg.jpg';
 
 interface Place {
   id: string;
@@ -52,7 +51,7 @@ const UserPlaces: React.FC = () => {
     <div
       className="px-8 h-full min-h-screen"
       style={{
-        backgroundImage: `url(${bgImage})`,
+        backgroundImage: `url(/img/place-list-bg.jpg)`,
         backgroundSize: 'cover',
       }}
     >

@@ -5,7 +5,6 @@ import Backdrop from '../UI/Backdrop';
 import MainHeader from './MainHeader';
 import NavLinks from './NavLinks';
 import SideDrawer from './SideDrawer';
-import logo from './../../../img/logo.png';
 
 const MainNavigation = () => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
@@ -39,7 +38,7 @@ const MainNavigation = () => {
         <h1 className="main-navigation__title h-auto w-48 block relative">
           <Link to="/">
             <div>
-              <img src={logo} className="App-logo" alt="Voyage Vault" />
+              <img src="img/logo.png" className="App-logo" alt="Voyage Vault" />
             </div>
           </Link>
         </h1>
