@@ -40,7 +40,7 @@ const Home: React.FC = () => {
                     alt="alt"
                   />
                 </div>
-                <div className="carousel__info h-fit max-w-screen-lg absolute inset-x-0 inset-y-0 mx-auto my-auto flex flex-wrap items-center justify-center uppercase">
+                <div className="carousel__info h-fit max-w-screen-lg absolute inset-x-0 inset-y-0 mx-auto my-auto flex flex-wrap items-center justify-center uppercase hover:cursor-default">
                   <h2 className="w-full text-center text-white text-8xl font-display leading-none drop-shadow-lg">
                     {currentSlide.title}
                   </h2>
