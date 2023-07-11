@@ -69,8 +69,6 @@ const Auth = () => {
   };
 
   const authSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
-    console.log(formState.inputs);
-
     event.preventDefault();
 
     if (isLoginMode) {

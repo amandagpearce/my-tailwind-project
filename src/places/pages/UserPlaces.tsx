@@ -34,6 +34,8 @@ const UserPlaces: React.FC = () => {
           'GET'
         );
 
+        console.log('responseData.places', responseData.places);
+
         setLoadedPlaces(responseData.places);
       } catch (err) {}
     };

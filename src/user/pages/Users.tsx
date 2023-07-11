@@ -23,7 +23,8 @@ const Users: React.FC = () => {
           `${process.env.REACT_BACKEND_URL}/users/`
         );
 
-        console.log('aaa', responseData.users);
+        console.log('responseData.users', responseData.users);
+
         setLoadedUsers(responseData.users);
       } catch (err) {}
     };
