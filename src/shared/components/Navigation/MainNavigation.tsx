@@ -38,7 +38,11 @@ const MainNavigation = () => {
         <h1 className="main-navigation__title h-auto w-48 block relative">
           <Link to="/">
             <div>
-              <img src="img/logo.png" className="App-logo" alt="Voyage Vault" />
+              <img
+                src="/img/logo.png"
+                className="App-logo"
+                alt="Voyage Vault"
+              />
             </div>
           </Link>
         </h1>

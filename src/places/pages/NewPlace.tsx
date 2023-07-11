@@ -100,10 +100,10 @@ const NewPlace = () => {
         className={`
                     place-form
                     list-none
-                    w-5/6
+                    w-4/6
                     p-4
                     mx-auto
-                    max-w-2xl
+                    max-w-xl
                     rounded-lg
                     bg-white
                     shadow-lg

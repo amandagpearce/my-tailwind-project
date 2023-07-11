@@ -61,7 +61,7 @@ const ImageUpload = (props) => {
         accept=".jpg,.png,.jpeg"
         onChange={pickedHandler}
       />
-      <div className="image-upload flex flex-wrap items-center justify-center flex-row">
+      <div className="image-upload">
         <div
           className="
         image-upload__preview
@@ -73,7 +73,8 @@ const ImageUpload = (props) => {
         border-2
         border-purple
         w-52
-        h-52"
+        h-52
+        mx-auto"
         >
           {previewUrl && (
             <img
@@ -84,7 +85,11 @@ const ImageUpload = (props) => {
           )}
           {!previewUrl && <p>Please pick an image.</p>}
         </div>
-        <Button className="w-2/3" type="button" onClick={pickImageHandler}>
+        <Button
+          className="w-52 mx-auto block"
+          type="button"
+          onClick={pickImageHandler}
+        >
           PICK IMAGE
         </Button>
       </div>
