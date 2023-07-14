@@ -96,11 +96,16 @@ const Auth = () => {
         formData.append('password', formState.inputs.password.value);
         formData.append('image', formState.inputs.image.value); // image key is expected in BE
 
+        console.log(
+          'formState.inputs.image.value',
+          formState.inputs.image.value
+        );
         const responseData = await sendRequest(
           `${process.env.REACT_BACKEND_URL}/users/signup`,
           'POST',
           formData // no need to set headers manually when sending FormData
         );
+
         authContext.login(responseData.userId, responseData.token);
         navigate('/');
       } catch (error) {}
