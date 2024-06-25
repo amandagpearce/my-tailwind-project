@@ -64,6 +64,7 @@ const App: React.FC = () => {
             fallback={
               <div className="mx-auto">
                 <LoadingSpinner asOverlay />
+                <p>TEST</p>
               </div>
             }
           >
